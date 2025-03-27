@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 // FAQ Item component
 interface FAQItemProps {
@@ -21,7 +22,7 @@ function FAQItem({ question, answer }: FAQItemProps) {
       >
         <span>{question}</span>
         <FontAwesomeIcon
-          icon={isOpen ? 'minus' : 'plus'}
+          icon={isOpen ? faMinus : faPlus}
           className={`h-5 w-5 ${isOpen ? 'text-[#D9E17F]' : 'text-gray-500'}`}
         />
       </button>

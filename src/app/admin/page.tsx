@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBagShopping, faFolder, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import { getAllProducts } from '@/lib/data/products';
 import { getAllCategories } from '@/lib/data/categories';
 
@@ -21,7 +22,7 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0 bg-[#D9E17F] bg-opacity-20 p-3 rounded-full">
-              <FontAwesomeIcon icon="shopping-bag" className="h-6 w-6 text-[#D9E17F]" />
+              <FontAwesomeIcon icon={faBagShopping} className="h-6 w-6 text-[#D9E17F]" />
             </div>
             <div className="ml-5">
               <p className="text-sm font-medium text-gray-500">Total Productos</p>
@@ -33,7 +34,7 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0 bg-[#F8C8DC] bg-opacity-20 p-3 rounded-full">
-              <FontAwesomeIcon icon="folder" className="h-6 w-6 text-[#F8C8DC]" />
+              <FontAwesomeIcon icon={faFolder} className="h-6 w-6 text-[#F8C8DC]" />
             </div>
             <div className="ml-5">
               <p className="text-sm font-medium text-gray-500">Categorías</p>
@@ -45,7 +46,7 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0 bg-[#C9E4CA] bg-opacity-20 p-3 rounded-full">
-              <FontAwesomeIcon icon="folder-open" className="h-6 w-6 text-[#C9E4CA]" />
+              <FontAwesomeIcon icon={faFolderOpen} className="h-6 w-6 text-[#C9E4CA]" />
             </div>
             <div className="ml-5">
               <p className="text-sm font-medium text-gray-500">Subcategorías</p>

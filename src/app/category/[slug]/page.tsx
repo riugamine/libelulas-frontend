@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from '@/components/product/ProductCard';
 import { getCategoryBySlug } from '@/lib/data/categories';
 import { getAllProducts } from '@/lib/data/products';
@@ -98,7 +99,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           className="w-full rounded-md border border-gray-300 px-4 py-2 pl-10 focus:border-[#D9E17F] focus:outline-none focus:ring-1 focus:ring-[#D9E17F]"
         />
         <FontAwesomeIcon
-          icon="search"
+          icon={faMagnifyingGlass}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
         />
       </div>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLeaf, faHandshakeAngle, faGem } from '@fortawesome/free-solid-svg-icons';
 
 export default function AboutPage() {
   return (
@@ -55,7 +56,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
             <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-[#D9E17F] text-gray-800 mb-4">
-              <FontAwesomeIcon icon="leaf" className="h-8 w-8" />
+              <FontAwesomeIcon icon={faLeaf} className="h-8 w-8" />
             </div>
             <h3 className="text-xl font-medium mb-2">Sostenibilidad</h3>
             <p className="text-gray-600">
@@ -65,7 +66,7 @@ export default function AboutPage() {
           
           <div className="text-center">
             <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-[#F8C8DC] text-gray-800 mb-4">
-              <FontAwesomeIcon icon="hands-helping" className="h-8 w-8" />
+              <FontAwesomeIcon icon={faHandshakeAngle} className="h-8 w-8" />
             </div>
             <h3 className="text-xl font-medium mb-2">Comunidad</h3>
             <p className="text-gray-600">
@@ -75,7 +76,7 @@ export default function AboutPage() {
           
           <div className="text-center">
             <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-[#C9E4CA] text-gray-800 mb-4">
-              <FontAwesomeIcon icon="gem" className="h-8 w-8" />
+              <FontAwesomeIcon icon={faGem} className="h-8 w-8" />
             </div>
             <h3 className="text-xl font-medium mb-2">Calidad</h3>
             <p className="text-gray-600">

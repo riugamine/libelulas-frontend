@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faBagShopping, faBars, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { categories } from '@/lib/data/categories';
 
 export default function Header() {
@@ -63,10 +64,10 @@ export default function Header() {
           {/* Search and Cart */}
           <div className="flex items-center space-x-4">
             <button className="text-gray-700 hover:text-[#D9E17F]">
-              <FontAwesomeIcon icon="search" className="h-5 w-5" />
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="h-5 w-5" />
             </button>
             <Link href="/cart" className="text-gray-700 hover:text-[#D9E17F]">
-              <FontAwesomeIcon icon="shopping-bag" className="h-5 w-5" />
+              <FontAwesomeIcon icon={faBagShopping} className="h-5 w-5" />
             </Link>
             
             {/* Mobile menu button */}
@@ -74,7 +75,7 @@ export default function Header() {
               className="md:hidden text-gray-700"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <FontAwesomeIcon icon="bars" className="h-5 w-5" />
+              <FontAwesomeIcon icon={faBars} className="h-5 w-5" />
             </button>
           </div>
         </div>
@@ -92,7 +93,7 @@ export default function Header() {
               >
                 <span>Productos</span>
                 <FontAwesomeIcon 
-                  icon={activeCategory === 'mobile-products' ? 'chevron-up' : 'chevron-down'} 
+                  icon={activeCategory === 'mobile-products' ? faChevronUp : faChevronDown} 
                   className="h-4 w-4" 
                 />
               </button>

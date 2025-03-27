@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faFilter } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from '@/components/product/ProductCard';
 import { getAllProducts } from '@/lib/data/products';
 import { getAllCategories } from '@/lib/data/categories';
@@ -74,7 +75,7 @@ export default function ProductsPage() {
               className="w-full rounded-md border border-gray-300 px-4 py-2 pl-10 focus:border-[#D9E17F] focus:outline-none focus:ring-1 focus:ring-[#D9E17F]"
             />
             <FontAwesomeIcon
-              icon="search"
+              icon={faMagnifyingGlass}
               className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
             />
           </div>
@@ -84,7 +85,7 @@ export default function ProductsPage() {
             onClick={() => setShowFilters(!showFilters)}
             className="md:hidden flex items-center justify-center rounded-md border border-gray-300 px-4 py-2 text-gray-700"
           >
-            <FontAwesomeIcon icon="filter" className="mr-2 h-4 w-4" />
+            <FontAwesomeIcon icon={faFilter} className="mr-2 h-4 w-4" />
             Filtros
           </button>
         </div>

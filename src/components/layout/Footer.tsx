@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faInstagram, faPinterestP } from '@fortawesome/free-brands-svg-icons';
 
 export default function Footer() {
   return (
@@ -23,13 +24,13 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#D9E17F]">
-                <FontAwesomeIcon icon={['fab', 'facebook-f']} className="h-5 w-5" />
+                <FontAwesomeIcon icon={faFacebookF} className="h-5 w-5" />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#D9E17F]">
-                <FontAwesomeIcon icon={['fab', 'instagram']} className="h-5 w-5" />
+                <FontAwesomeIcon icon={faInstagram} className="h-5 w-5" />
               </a>
               <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#D9E17F]">
-                <FontAwesomeIcon icon={['fab', 'pinterest-p']} className="h-5 w-5" />
+                <FontAwesomeIcon icon={faPinterestP} className="h-5 w-5" />
               </a>
             </div>
           </div>

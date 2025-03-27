@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { Product } from '@/lib/types';
 
 interface ProductCardProps {
@@ -30,10 +32,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Quick Actions */}
         <div className="absolute right-3 top-3 flex flex-col space-y-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <button className="rounded-full bg-white p-2 shadow-md hover:bg-[#D9E17F]">
-            <FontAwesomeIcon icon="heart" className="h-4 w-4 text-gray-700" />
+            <FontAwesomeIcon icon={faHeart} className="h-4 w-4 text-gray-700" />
           </button>
           <button className="rounded-full bg-white p-2 shadow-md hover:bg-[#D9E17F]">
-            <FontAwesomeIcon icon="share" className="h-4 w-4 text-gray-700" />
+            <FontAwesomeIcon icon={faShare} className="h-4 w-4 text-gray-700" />
           </button>
         </div>
       </div>
@@ -64,7 +66,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           rel="noopener noreferrer"
           className="mt-4 flex w-full items-center justify-center rounded-md bg-[#D9E17F] px-4 py-2 font-medium text-gray-800 transition-colors hover:bg-[#C9D16F]"
         >
-          <FontAwesomeIcon icon={['fab', 'whatsapp']} className="mr-2 h-5 w-5" />
+          <FontAwesomeIcon icon={faWhatsapp} className="mr-2 h-5 w-5" />
           Comprar por WhatsApp
         </Link>
       </div>

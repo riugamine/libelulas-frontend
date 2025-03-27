@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getProductBySlug } from '@/lib/data/products';
 import { getCategoryBySlug } from '@/lib/data/categories';
 import { ProductVariant, ProductDesign } from '@/lib/types';
@@ -112,13 +113,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               onClick={handlePrevImage}
               className="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-full"
             >
-              <FontAwesomeIcon icon="arrow-left" className="h-4 w-4 text-gray-800" />
+              <FontAwesomeIcon icon={faArrowLeft} className="h-4 w-4 text-gray-800" />
             </button>
             <button 
               onClick={handleNextImage}
               className="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-full"
             >
-              <FontAwesomeIcon icon="arrow-right" className="h-4 w-4 text-gray-800" />
+              <FontAwesomeIcon icon={faArrowRight} className="h-4 w-4 text-gray-800" />
             </button>
           </div>
 
