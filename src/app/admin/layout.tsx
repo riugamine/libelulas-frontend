@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faBagShopping, faFolder, faUsers, faGear, } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faBagShopping, faFolder, faUsers, faGear, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function AdminLayout({
   children,
@@ -86,6 +86,31 @@ export default function AdminLayout({
 
       {/* Mobile sidebar */}
       {/* Rest of the component remains unchanged, but update FontAwesomeIcon usage */}
+      {/* Main content */}
+      <div className="md:pl-64">
+        {/* Top bar */}
+        <div className="sticky top-0 z-10 bg-white shadow-sm">
+          <div className="flex h-16 items-center justify-between px-4">
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden rounded-md bg-white p-2 text-gray-700"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            >
+              <FontAwesomeIcon icon={isSidebarOpen ? faXmark : faBars} className="h-6 w-6" />
+            </button>
+            
+            {/* User menu */}
+            <div className="ml-auto">
+              {/* User profile or other controls */}
+            </div>
+          </div>
+        </div>
+        
+        {/* Page content */}
+        <main className="p-4">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

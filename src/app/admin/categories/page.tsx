@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getAllCategories } from '@/lib/data/categories';
 import { Category } from '@/lib/types';
 
@@ -43,7 +44,7 @@ export default function AdminCategories() {
           href="/admin/categories/new"
           className="inline-flex items-center justify-center rounded-md bg-[#D9E17F] px-4 py-2 font-medium text-gray-800 hover:bg-[#C9D16F]"
         >
-          <FontAwesomeIcon icon="plus" className="mr-2 h-4 w-4" />
+          <FontAwesomeIcon icon={faPlus} className="mr-2 h-4 w-4" />
           Nueva Categoría
         </Link>
       </div>
@@ -59,7 +60,7 @@ export default function AdminCategories() {
             className="w-full rounded-md border border-gray-300 px-4 py-2 pl-10 focus:border-[#D9E17F] focus:outline-none focus:ring-1 focus:ring-[#D9E17F]"
           />
           <FontAwesomeIcon
-            icon="search"
+            icon={faMagnifyingGlass}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
           />
         </div>

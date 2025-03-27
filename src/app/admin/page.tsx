@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBagShopping, faFolder, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import { faBagShopping, faFolder, faFolderOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { getAllProducts } from '@/lib/data/products';
 import { getAllCategories } from '@/lib/data/categories';
 
@@ -64,7 +64,7 @@ export default function AdminDashboard() {
             href="/admin/products/new" 
             className="flex items-center justify-center rounded-md bg-[#D9E17F] px-4 py-2 font-medium text-gray-800 hover:bg-[#C9D16F]"
           >
-            <FontAwesomeIcon icon="plus" className="mr-2 h-4 w-4" />
+            <FontAwesomeIcon icon={faPlus} className="mr-2 h-4 w-4" />
             Nuevo Producto
           </Link>
           <Link 
