@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Libélulas Design - Tienda Online
 
-## Getting Started
+## Descripción del Proyecto
+Ecommerce especializado en papelería personalizada y agendas con diseño único, desarrollado con Next.js 14 (App Router), Tailwind CSS y ShadCN/UI.
 
-First, run the development server:
+## Stack Tecnológico
+- **Frontend**: Next.js 14, React, TypeScript
+- **Estilos**: Tailwind CSS + ShadCN/UI
+- **Iconos**: FontAwesome
+- **Animaciones**: Framer Motion
+- **Gestión de Estado**: Zustand
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Estructura del Proyecto
+- `app`: Contiene la estructura de la aplicación Next.js.
+- `components`: Componentes reutilizables.
+- `public`: Archivos estáticos.
+- `styles`: Estilos globales.
+- `utils`: Funciones y utilidades.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features Clave
+- 🛍️ Catálogo con filtros avanzados
+- 🎨 Selector interactivo de diseños
+- 📱 100% responsive
+- 📊 Panel de administración
+- 💬 Integración WhatsApp
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Instalación
+1. Clona el repositorio.
+2. Ejecuta `npm install` para instalar las dependencias.
+3. Ejecuta `npm run dev` para iniciar el servidor de desarrollo.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👨‍💻 About the Developer
+Hi! I'm Jose Angel Velasquez, a Full Stack Developer passionate about creating impactful web applications. I specialize in:
 
-## Learn More
+🎯 Modern Web Development
+🎨 UI/UX Design Implementation
+📱 Responsive Web Applications
+⚡ Performance Optimization
+🔒 Security Best Practices
+Connect with me:
+- [LinkedIn](https://www.linkedin.com/in/jose-velasquez-b2a65b1a1/)
+- [Instagram](https://www.instagram.com/joseangelweb_)
+- [WhasApp](wa.me/5804126893533)
+Feel free to reach out!
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 Contact
+For business inquiries or collaboration opportunities:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Email: jangel9829@gmail.com
+Website: https://github.com/riugamine Powered by Joseangelweb
