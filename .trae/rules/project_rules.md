@@ -9,7 +9,7 @@
 
 ## Frontend (Next.js)
 ### Estilos
-- Tailwind CSS con paleta de marca (`primary: #CFE2C3`)
+- Tailwind CSS con paleta de marca (`primary: #CFE2C3`) v4
 - Mobile-first, responsive por defecto
 - Componentes ShadCN/ui como base
 
