@@ -21,17 +21,17 @@ export default function Home() {
       <section className="relative h-[70vh] bg-gradient-to-r from-primary-50 to-primary-100">
         <div className="container mx-auto px-4 h-full flex items-center">
           <div className="max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary-950 mb-4">
               Diseños únicos para momentos especiales
             </h1>
-            <p className="text-lg text-gray-700 mb-8">
+            <p className="text-lg text-primary-800 mb-8">
               Descubre nuestra colección de papelería personalizada, agendas y accesorios diseñados con amor para hacer tu día a día más especial.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" asChild>
+              <Button size="lg" className="bg-primary-600 hover:bg-primary-700 text-white" asChild>
                 <Link href="/products">Ver Productos</Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" className="border-primary-300 text-primary-700 hover:bg-primary-50" asChild>
                 <Link href="/about">Conoce Nuestra Historia</Link>
               </Button>
             </div>
@@ -52,7 +52,7 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Productos Destacados</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary-900">Productos Destacados</h2>
             <Link href="/products" className="text-primary-600 hover:text-primary-700 font-medium">
               Ver todos →
             </Link>
@@ -67,9 +67,9 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-primary-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary-900 mb-8 text-center">
             Explora Nuestras Categorías
           </h2>
           
@@ -86,8 +86,8 @@ export default function Home() {
                   fill
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-20 transition-all duration-300"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent group-hover:from-primary-800/70 transition-all duration-300"></div>
+                <div className="absolute inset-0 flex items-end p-6">
                   <h3 className="text-white text-2xl font-bold">{category.name}</h3>
                 </div>
               </Link>
@@ -99,7 +99,7 @@ export default function Home() {
       {/* Features */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary-900 mb-12 text-center">
             ¿Por qué elegir Libélulas Design?
           </h2>
           
@@ -110,8 +110,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Diseños Exclusivos</h3>
-              <p className="text-gray-600">Todos nuestros productos son diseñados con amor y dedicación para ofrecerte piezas únicas.</p>
+              <h3 className="text-xl font-semibold mb-2 text-primary-800">Diseños Exclusivos</h3>
+              <p className="text-primary-700">Todos nuestros productos son diseñados con amor y dedicación para ofrecerte piezas únicas.</p>
             </div>
             
             <div className="text-center">
@@ -120,8 +120,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Calidad Premium</h3>
-              <p className="text-gray-600">Utilizamos materiales de la más alta calidad para garantizar productos duraderos y hermosos.</p>
+              <h3 className="text-xl font-semibold mb-2 text-primary-800">Calidad Premium</h3>
+              <p className="text-primary-700">Utilizamos materiales de la más alta calidad para garantizar productos duraderos y hermosos.</p>
             </div>
             
             <div className="text-center">
@@ -130,86 +130,86 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Envío Rápido</h3>
-              <p className="text-gray-600">Procesamos tu pedido en 24-48 horas para que recibas tus productos lo antes posible.</p>
+              <h3 className="text-xl font-semibold mb-2 text-primary-800">Envío Rápido</h3>
+              <p className="text-primary-700">Procesamos tu pedido en 24-48 horas para que recibas tus productos lo antes posible.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-primary-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary-900 mb-12 text-center">
             Lo que dicen nuestros clientes
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-primary-100">
               <div className="flex items-center mb-4">
                 <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-3">
                   <span className="text-primary-600 font-bold">M</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold">María González</h4>
-                  <div className="flex text-yellow-400">
+                  <h4 className="font-semibold text-primary-900">María González</h4>
+                  <div className="flex text-secondary-400">
                     <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                   </div>
                 </div>
               </div>
-              <p className="text-gray-600">"Mi agenda personalizada es hermosa, la calidad del papel y la impresión son excelentes. ¡Definitivamente volveré a comprar!"</p>
+              <p className="text-primary-700">"Mi agenda personalizada es hermosa, la calidad del papel y la impresión son excelentes. ¡Definitivamente volveré a comprar!"</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-sm">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-primary-100">
               <div className="flex items-center mb-4">
                 <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-3">
                   <span className="text-primary-600 font-bold">C</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold">Carlos Rodríguez</h4>
-                  <div className="flex text-yellow-400">
+                  <h4 className="font-semibold text-primary-900">Carlos Rodríguez</h4>
+                  <div className="flex text-secondary-400">
                     <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                   </div>
                 </div>
               </div>
-              <p className="text-gray-600">"Compré varios artículos de papelería como regalo y quedaron encantados. El empaque es precioso y los diseños son únicos."</p>
+              <p className="text-primary-700">"Compré varios artículos de papelería como regalo y quedaron encantados. El empaque es precioso y los diseños son únicos."</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-sm">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-primary-100">
               <div className="flex items-center mb-4">
                 <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-3">
                   <span className="text-primary-600 font-bold">L</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold">Laura Martínez</h4>
-                  <div className="flex text-yellow-400">
+                  <h4 className="font-semibold text-primary-900">Laura Martínez</h4>
+                  <div className="flex text-secondary-400">
                     <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                   </div>
                 </div>
               </div>
-              <p className="text-gray-600">"El servicio al cliente es excepcional. Tuve un problema con mi pedido y lo resolvieron de inmediato. ¡Muy recomendable!"</p>
+              <p className="text-primary-700">"El servicio al cliente es excepcional. Tuve un problema con mi pedido y lo resolvieron de inmediato. ¡Muy recomendable!"</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter */}
+      {/* Newsletter - Agregado con colores de marca */}
       <section className="py-16 bg-primary-600 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Únete a nuestra comunidad
             </h2>
-            <p className="mb-8">
+            <p className="mb-8 text-primary-50">
               Suscríbete para recibir noticias sobre nuevos productos, ofertas especiales y contenido exclusivo.
             </p>
             <div className="flex flex-col sm:flex-row gap-2">
               <input 
                 type="email" 
                 placeholder="Tu correo electrónico" 
-                className="flex-1 px-4 py-3 rounded-md text-gray-900 focus:outline-none"
+                className="flex-1 px-4 py-3 rounded-md text-primary-900 focus:outline-none focus:ring-2 focus:ring-secondary-400"
               />
-              <Button variant="secondary" size="lg">
+              <Button className="bg-secondary-500 hover:bg-secondary-600 text-white" size="lg">
                 Suscribirse
               </Button>
             </div>

@@ -22,6 +22,7 @@ export type Product = {
   designs: ProductDesign[];
   featured: boolean;
   stock: number;
+  image: string; // Nueva propiedad para la imagen principal
 };
 
 export const colors: ProductColor[] = [
@@ -55,7 +56,8 @@ export const products: Product[] = [
       }
     ],
     featured: true,
-    stock: 15
+    stock: 15,
+    image: "/images/products/agenda-floral-1.jpg" // Imagen principal
   },
   {
     id: "2",
@@ -79,7 +81,8 @@ export const products: Product[] = [
       }
     ],
     featured: false,
-    stock: 25
+    stock: 25,
+    image: "/images/products/libreta-abstracta-1.jpg" // Imagen principal
   },
   {
     id: "3",
@@ -103,7 +106,8 @@ export const products: Product[] = [
       }
     ],
     featured: true,
-    stock: 10
+    stock: 10,
+    image: "/images/products/planner-botanico-1.jpg" // Imagen principal
   },
   {
     id: "4",
@@ -127,7 +131,8 @@ export const products: Product[] = [
       }
     ],
     featured: false,
-    stock: 30
+    stock: 30,
+    image: "/images/products/cuaderno-clasico-1.jpg" // Imagen principal
   },
   {
     id: "5",
@@ -151,7 +156,8 @@ export const products: Product[] = [
       }
     ],
     featured: true,
-    stock: 20
+    stock: 20,
+    image: "/images/products/agenda-universitaria-1.jpg" // Imagen principal
   },
   {
     id: "6",
@@ -175,6 +181,7 @@ export const products: Product[] = [
       }
     ],
     featured: false,
-    stock: 15
+    stock: 15,
+    image: "/images/products/libreta-aventura-1.jpg" // Imagen principal
   }
 ];
