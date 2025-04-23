@@ -32,14 +32,13 @@ export default function Home() {
         {/* Contenido centrado */}
         <div className="container mx-auto px-4 flex flex-col items-center justify-center text-center relative z-10">
           <div className="max-w-2xl z-10 space-y-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-primary-500">
+            <h1 className="text-3xl md:text-4xl font-bold text-primary">
               <span className="block">Diseños únicos</span>
               <span className="block text-primary-700">para momentos especiales</span>
             </h1>
             
             <Button 
               size="lg"
-              
               className="bg-primary-300 hover:bg-primary-200 text-primary-900 font-medium mt-4"
               asChild
             >
@@ -65,10 +64,6 @@ export default function Home() {
             <div className="p-4">
               <p className="text-2xl md:text-3xl font-bold text-primary-900 mb-1">10.000+</p>
               <p className="text-sm text-primary-600">Diseños personalizados</p>
-            </div>
-            <div className="p-4">
-              <p className="text-2xl md:text-3xl font-bold text-primary-900 mb-1">15%</p>
-              <p className="text-sm text-primary-600">Descuento en primera compra</p>
             </div>
           </div>
         </div>
