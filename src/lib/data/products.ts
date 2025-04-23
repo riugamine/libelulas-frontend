@@ -35,6 +35,45 @@ export const colors: ProductColor[] = [
 
 export const products: Product[] = [
   {
+    id: "7",
+    name: "Agenda Atemporal",
+    slug: "agenda-atemporal",
+    description: "Agenda versátil y atemporal con diseño minimalista. Perfecta para organizar tus actividades en cualquier momento del año sin fechas predefinidas.",
+    price: 29.99,
+    categoryId: "1",
+    subcategoryId: "1",
+    colors: [colors[0], colors[1], colors[4]],
+    designs: [
+      {
+        id: "13",
+        name: "Atemporal Clásico",
+        images: [
+          "/images/products/agenda-atemporal/agenda-atemporal-1.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-2.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-3.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-4.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-5.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-6.jpg"
+        ]
+      },
+      {
+        id: "14",
+        name: "Atemporal Premium",
+        images: [
+          "/images/products/agenda-atemporal/agenda-atemporal-7.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-8.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-9.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-10.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-11.jpg",
+          "/images/products/agenda-atemporal/agenda-atemporal-12.jpg"
+        ]
+      }
+    ],
+    featured: true,
+    stock: 20,
+    image: "/images/products/agenda-atemporal/agenda-atemporal-1.jpg"
+  },
+  {
     id: "1",
     name: "Agenda Ejecutiva 2024",
     slug: "agenda-ejecutiva-2024",

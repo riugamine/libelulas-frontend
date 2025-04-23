@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

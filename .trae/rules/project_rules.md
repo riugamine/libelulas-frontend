@@ -10,3 +10,5 @@ use nextjs for all the pages
 use the lib/data/ for all the data fetching
 use fontawesome for all the icons
 use pnpm as the package manager
+mantain the code clean and readable
+mantain the mobile first design
