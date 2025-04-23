@@ -9,6 +9,7 @@ import { products } from "@/lib/data/products";
 import { categories } from "@/lib/data/categories";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { Parallax } from 'react-parallax';
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState(products.filter(p => p.featured).slice(0, 4));
@@ -17,25 +18,37 @@ export default function Home() {
     <>
     <Header />
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[600px] w-full bg-gradient-to-r from-primary-900 to-primary-800 overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[url('/images/pattern.png')] bg-repeat"></div>
-        <div className="container mx-auto px-4 h-full flex items-center">
-          <div className="max-w-xl z-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              <span className="block mb-2">Diseños únicos</span>
-              <span className="block mb-2">para momentos</span>
-              <span className="block text-primary-100">especiales</span>
+      {/* Hero Section with Parallax */}
+      <Parallax
+        blur={0}
+        bgImage="/images/pattern.png"
+        bgImageAlt="Patrón de libélulas"
+        strength={200}
+        className="relative h-[50vh] w-full flex items-center justify-center overflow-hidden"
+      >
+        {/* Overlay con gradiente */}
+        <div className="absolute inset-0 bg-white/40 h-[50vh]"></div>
+        
+        {/* Contenido centrado */}
+        <div className="container mx-auto px-4 flex flex-col items-center justify-center text-center relative z-10">
+          <div className="max-w-2xl z-10 space-y-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-primary-500">
+              <span className="block">Diseños únicos</span>
+              <span className="block text-primary-700">para momentos especiales</span>
             </h1>
-            <p className="text-lg text-white mb-8">
-              Descubre nuestra colección de papelería personalizada, agendas y accesorios diseñados con amor para hacer tu día a día más especial.
-            </p>
-            <Button size="lg" className="bg-primary-300 hover:bg-primary-200 text-primary-900 font-medium" asChild>
+            
+            <Button 
+              size="lg"
+              
+              className="bg-primary-300 hover:bg-primary-200 text-primary-900 font-medium mt-4"
+              asChild
+            >
               <Link href="/products">Ver Productos</Link>
             </Button>
           </div>
         </div>
-      </section>
+      </Parallax>
+      
 
       {/* Stats Section */}
       <section className="bg-white py-8 border-b border-gray-100">

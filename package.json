@@ -48,6 +48,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
     "postcss": "^8.5.3",
+    "react-parallax": "^3.5.2",
     "tailwindcss": "^4.1.4",
     "typescript": "^5"
   }
