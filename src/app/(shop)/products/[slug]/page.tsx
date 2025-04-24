@@ -105,6 +105,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
   }
   
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://mundolibelulas.com'),
     title: `${product.name} | Libélulas Design`,
     description: product.description,
     openGraph: {

@@ -12,7 +12,20 @@ export function Footer() {
           {/* Información de la Tienda */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="font-medium text-sm uppercase tracking-wider text-gray-500 mb-4">TIENDA</h3>
-            <p className="text-sm text-gray-600">© {currentYear} Libélulas Design™. Todos los derechos reservados.</p>
+            <p className="text-sm text-gray-600">
+              © {currentYear} Libélulas Design™. Todos los derechos reservados.{" "}
+              <span>
+                Powered by{" "}
+                <Link 
+                  href="https://www.instagram.com/joseangelweb_" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  joseangelweb
+                </Link>
+              </span>
+            </p>
           </div>
 
           {/* Legal */}
