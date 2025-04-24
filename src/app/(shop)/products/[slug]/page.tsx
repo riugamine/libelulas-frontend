@@ -47,8 +47,8 @@ interface ProductPageProps {
  * @param params - Parámetros de la ruta, incluye el slug del producto
  */
 export default async function ProductPage({ params }: ProductPageProps) {
-  const slug = await params.slug;
-  const product = products.find(p => p.slug === slug);
+  const resolvedParams = await Promise.resolve(params);
+  const product = products.find(p => p.slug === resolvedParams.slug);
 
   if (!product) {
     notFound();
@@ -94,8 +94,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
  * @param params - Parámetros de la ruta
  */
 export async function generateMetadata({ params }: ProductPageProps) {
-  const slug = await params.slug;
-  const product = products.find(p => p.slug === slug);
+  const resolvedParams = await Promise.resolve(params);
+  const product = products.find(p => p.slug === resolvedParams.slug);
   
   if (!product) {
     return {

@@ -1,94 +1,98 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { categories } from "@/lib/data/categories";
+import { faInstagram, faTiktok, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white">
-      <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white">Libélulas Design</h3>
-            <p className="text-gray-300 text-base">
-              Libretas y agendas personalizadas para todos los gustos y necesidades.
-            </p>
-            <div className="flex space-x-6 mt-6">
-              <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary-400 transition-colors">
-                <FontAwesomeIcon icon={faFacebook} className="h-7 w-7" />
-              </Link>
-              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary-400 transition-colors">
-                <FontAwesomeIcon icon={faInstagram} className="h-7 w-7" />
-              </Link>
-              <Link href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary-400 transition-colors">
-                <FontAwesomeIcon icon={faWhatsapp} className="h-7 w-7" />
-              </Link>
-            </div>
+    <footer className="border-t border-gray-200">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Información de la Tienda */}
+          <div className="col-span-2 md:col-span-1">
+            <h3 className="font-medium text-sm uppercase tracking-wider text-gray-500 mb-4">TIENDA</h3>
+            <p className="text-sm text-gray-600">© {currentYear} Libélulas Design™. Todos los derechos reservados.</p>
           </div>
-          
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">Productos</h3>
-            <ul className="space-y-3">
-              {categories.map((category) => (
-                <li key={category.id}>
-                  <Link href={`/category/${category.slug}`} className="text-gray-300 hover:text-white transition-colors text-base">
-                    {category.name}
-                  </Link>
-                </li>
-              ))}
+
+          {/* Legal */}
+          <div>
+            <h3 className="font-medium text-sm uppercase tracking-wider text-gray-500 mb-4">LEGAL</h3>
+            <ul className="space-y-2">
               <li>
-                <Link href="/products" className="text-gray-300 hover:text-white transition-colors text-base">
-                  Ver todos
+                <Link href="/privacy" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Política de Privacidad
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Términos y Condiciones
                 </Link>
               </li>
             </ul>
           </div>
-          
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">Enlaces</h3>
-            <ul className="space-y-3">
+
+          {/* Recursos */}
+          <div>
+            <h3 className="font-medium text-sm uppercase tracking-wider text-gray-500 mb-4">RECURSOS</h3>
+            <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-white transition-colors text-base">
-                  Nosotros
+                <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Blog
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
+                <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Nosotros
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Soporte */}
+          <div>
+            <h3 className="font-medium text-sm uppercase tracking-wider text-gray-500 mb-4">SOPORTE</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Contacto
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-gray-300 hover:text-white transition-colors text-base">
+                <Link href="/faq" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Preguntas Frecuentes
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="text-gray-300 hover:text-white transition-colors text-base">
-                  Términos y Condiciones
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors text-base">
-                  Política de Privacidad
                 </Link>
               </li>
             </ul>
           </div>
-          
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">Contacto</h3>
-            <address className="not-italic space-y-3 text-gray-300 text-base">
-              <p>Ciudad, País</p>
-              <p>Email: info@libelulasdesign.com</p>
-              <p>Teléfono: +1 234 567 890</p>
-            </address>
-          </div>
         </div>
-        
-        <div className="border-t border-gray-800 mt-10 pt-8 text-center text-gray-400">
-          <p className="text-base">&copy; {currentYear} Libélulas Design. Todos los derechos reservados.</p>
+
+        {/* Enlaces de Redes Sociales */}
+        <div className="flex justify-center space-x-6 mt-8 pt-8 border-t border-gray-200">
+          <Link 
+            href="https://instagram.com" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-gray-400 hover:text-gray-500 transition-colors"
+          >
+            <FontAwesomeIcon icon={faInstagram} className="h-5 w-5" />
+          </Link>
+          <Link 
+            href="https://tiktok.com" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-gray-400 hover:text-gray-500 transition-colors"
+          >
+            <FontAwesomeIcon icon={faTiktok} className="h-5 w-5" />
+          </Link>
+          <Link 
+            href="https://wa.me/1234567890" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-gray-400 hover:text-gray-500 transition-colors"
+          >
+            <FontAwesomeIcon icon={faWhatsapp} className="h-5 w-5" />
+          </Link>
         </div>
       </div>
     </footer>
