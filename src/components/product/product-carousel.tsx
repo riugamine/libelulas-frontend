@@ -39,71 +39,60 @@ export function ProductCarousel({ images, alt }: ProductCarouselProps) {
   }
 
   return (
-    <div className="relative">
-      <div className="aspect-square relative overflow-hidden rounded-md">
+    <div className="space-y-3">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
         <Image
           src={images[currentIndex]}
           alt={`${alt} - Imagen ${currentIndex + 1}`}
           fill
-          className="object-cover"
+          className="object-cover transition-opacity duration-300"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
         />
+        
+        {images.length > 1 && (
+          <>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/80 hover:bg-white shadow-sm transition-all duration-200"
+              onClick={goToPrevious}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} className="h-3 w-3" />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/80 hover:bg-white shadow-sm transition-all duration-200"
+              onClick={goToNext}
+            >
+              <FontAwesomeIcon icon={faChevronRight} className="h-3 w-3" />
+            </Button>
+          </>
+        )}
       </div>
       
       {images.length > 1 && (
-        <>
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/80 hover:bg-white"
-            onClick={goToPrevious}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} className="h-4 w-4" />
-          </Button>
-          
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/80 hover:bg-white"
-            onClick={goToNext}
-          >
-            <FontAwesomeIcon icon={faChevronRight} className="h-4 w-4" />
-          </Button>
-          
-          <div className="flex justify-center mt-4 space-x-2">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-2 w-2 rounded-full ${
-                  currentIndex === index ? "bg-primary-600" : "bg-gray-300"
-                }`}
-                aria-label={`Ir a imagen ${index + 1}`}
-              />
-            ))}
-          </div>
-        </>
-      )}
-      
-      {images.length > 1 && (
-        <div className="flex mt-4 space-x-2 overflow-x-auto pb-2">
+        <div className="grid grid-cols-5 gap-1.5">
           {images.map((image, index) => (
-            <div
+            <button
               key={index}
-              className={`relative w-16 h-16 cursor-pointer rounded-md overflow-hidden ${
-                currentIndex === index ? "ring-2 ring-primary-600" : "opacity-70"
-              }`}
               onClick={() => goToSlide(index)}
+              className={`relative aspect-square rounded-md overflow-hidden transition-all duration-200 ${
+                currentIndex === index 
+                  ? "ring-1 ring-primary ring-offset-1" 
+                  : "opacity-60 hover:opacity-100"
+              }`}
             >
               <Image
                 src={image}
                 alt={`${alt} - Miniatura ${index + 1}`}
                 fill
                 className="object-cover"
-                sizes="64px"
+                sizes="(max-width: 768px) 20vw, 80px"
               />
-            </div>
+            </button>
           ))}
         </div>
       )}

@@ -20,7 +20,6 @@ function RelatedProductsLoading() {
 
 // Componente para productos relacionados
 function RelatedProducts({ categoryId, currentProductId }: { categoryId: string, currentProductId: string }) {
-  // Obtenemos productos relacionados (misma categoría, excluyendo el producto actual)
   const relatedProducts = products
     .filter(p => p.categoryId === categoryId && p.id !== currentProductId)
     .slice(0, 4);
@@ -30,7 +29,7 @@ function RelatedProducts({ categoryId, currentProductId }: { categoryId: string,
   }
   
   return (
-    <div className="mt-16">
+    <div className="container mx-auto px-4 mt-16">
       <h2 className="text-2xl font-bold mb-6 text-primary-900">Productos relacionados</h2>
       <ProductGrid products={relatedProducts} />
     </div>
@@ -48,20 +47,15 @@ interface ProductPageProps {
  * @param params - Parámetros de la ruta, incluye el slug del producto
  */
 export default async function ProductPage({ params }: ProductPageProps) {
-  // Obtenemos el slug de los parámetros
-  const slug = params.slug;
-  
-  // Buscamos el producto por su slug
+  const { slug } = params;
   const product = products.find(p => p.slug === slug);
 
-  // Si no encontramos el producto, mostramos la página 404
   if (!product) {
     notFound();
   }
-  
+
   return (
-    <div className="container py-8">
-      {/* Metadatos para SEO */}
+    <div className="py-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -81,16 +75,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
         }}
       />
       
-      {/* Detalle del producto */}
-      <ProductDetail product={product} />
-      
-      {/* Productos relacionados con Suspense para carga asíncrona */}
-      <Suspense fallback={<RelatedProductsLoading />}>
-        <RelatedProducts 
-          categoryId={product.categoryId} 
-          currentProductId={product.id} 
-        />
-      </Suspense>
+      <div className="container mx-auto px-4">
+        <ProductDetail product={product} />
+        
+        <Suspense fallback={<RelatedProductsLoading />}>
+          <RelatedProducts 
+            categoryId={product.categoryId} 
+            currentProductId={product.id} 
+          />
+        </Suspense>
+      </div>
     </div>
   );
 }
