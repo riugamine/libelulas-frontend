@@ -11,6 +11,7 @@ interface ProductFilters {
   categories: string[];
   subcategories: string[];
   colors: string[];
+  designs: string[];
   priceRange: [number, number];
 }
 
@@ -19,7 +20,8 @@ const defaultFilters: ProductFilters = {
   categories: [],
   subcategories: [],
   colors: [],
-  priceRange: [0, 5000] // Asumiendo un rango de precios máximo
+  designs: [],
+  priceRange: [0, 5000] as [number, number]
 };
 
 export default function ProductsPage() {
@@ -36,6 +38,7 @@ export default function ProductsPage() {
       categories: params.get('categories')?.split(',').filter(Boolean) || [],
       subcategories: params.get('subcategories')?.split(',').filter(Boolean) || [],
       colors: params.get('colors')?.split(',').filter(Boolean) || [],
+      designs: params.getAll('designs').filter(Boolean),
       priceRange: [
         parseInt(params.get('minPrice') || '0', 10),
         parseInt(params.get('maxPrice') || '5000', 10)
@@ -115,35 +118,40 @@ export default function ProductsPage() {
   }, [getFiltersFromUrl, applyFilters]);
   
   return (
-    <div className="container py-8">
-      <h1 className="text-3xl font-bold mb-8 text-primary-900">Todos los Productos</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="md:col-span-1">
-          <ProductFilters 
-            initialFilters={getFiltersFromUrl()} 
-            onFilterChange={handleFilterChange} 
-          />
+    <div className="container mx-auto px-4 py-12 max-w-7xl">
+      <div className="flex flex-col space-y-8">
+        {/* Encabezado y Contador de Productos */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-medium text-gray-900">Productos</h1>
+          <p className="text-sm text-gray-500">
+            {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
+          </p>
         </div>
-        
-        <div className="md:col-span-3">
-          {isLoading ? (
-            <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
-            </div>
-          ) : filteredProducts.length === 0 ? (
-            <div className="text-center py-12 bg-primary-50 rounded-lg border border-primary-100">
-              <h2 className="text-xl font-medium mb-2 text-primary-800">No se encontraron productos</h2>
-              <p className="text-primary-600">Intenta con otros filtros</p>
-            </div>
-          ) : (
-            <>
-              <p className="text-sm text-primary-600 mb-4">
-                Mostrando {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
-              </p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
+          {/* Panel de Filtros */}
+          <aside className="space-y-6 self-start bg-white p-6 rounded-lg border border-gray-100">
+            <ProductFilters 
+              initialFilters={getFiltersFromUrl()} 
+              onFilterChange={handleFilterChange} 
+            />
+          </aside>
+
+          {/* Grid de Productos */}
+          <main>
+            {isLoading ? (
+              <div className="flex justify-center items-center h-64">
+                <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent"></div>
+              </div>
+            ) : filteredProducts.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-64 text-center">
+                <p className="text-lg text-gray-600 mb-2">No se encontraron productos</p>
+                <p className="text-sm text-gray-500">Intenta ajustar los filtros de búsqueda</p>
+              </div>
+            ) : (
               <ProductGrid products={filteredProducts} />
-            </>
-          )}
+            )}
+          </main>
         </div>
       </div>
     </div>
