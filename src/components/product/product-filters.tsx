@@ -99,7 +99,7 @@ export function ProductFilters({
     setPriceRange([value[0], value[1]] as [number, number]);
   };
 
-  // Add collection selection handler
+ // Handle collection selection
   const handleCollectionChange = (collectionId: string, checked: boolean) => {
     if (checked) {
       setSelectedCollections([...selectedCollections, collectionId]);
