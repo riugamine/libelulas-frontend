@@ -7,7 +7,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+library.add(fab);
 const faqs = [
   {
     question: "¿Cuánto tiempo tarda en llegar mi pedido?",
@@ -62,70 +68,94 @@ export default function FAQPage() {
     : faqs;
   
   return (
-    <div className="container py-12">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">
+    <div className="container max-w-4xl mx-auto px-4 py-16">
+      {/* Encabezado */}
+      <div className="text-center space-y-4 mb-12">
+        <h1 className="text-4xl font-bold text-gray-900">
           Preguntas Frecuentes
         </h1>
-        
-        <div className="relative mb-8">
-          <input
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Encuentra respuestas a las preguntas más comunes sobre nuestros productos y servicios
+        </p>
+      </div>
+      
+      {/* Buscador */}
+      <div className="relative mb-12">
+        <div className="relative">
+          <Input
             type="text"
             placeholder="Buscar preguntas..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="pl-10 pr-10"
+          />
+          <FontAwesomeIcon 
+            icon={faSearch} 
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
           />
           {searchTerm && (
             <button
               onClick={() => setSearchTerm("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
             >
-              ✕
+              <FontAwesomeIcon icon={faTimes} />
             </button>
           )}
         </div>
-        
-        {filteredFaqs.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-lg text-gray-600">
-              No se encontraron resultados para "{searchTerm}".
-            </p>
-            <p className="mt-2">
-              Intenta con otros términos o{" "}
-              <a href="/contact" className="text-primary-600 hover:underline">
-                contáctanos directamente
-              </a>
-              .
-            </p>
-          </div>
-        ) : (
-          <Accordion type="single" collapsible className="space-y-4">
-            {filteredFaqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border rounded-lg p-2">
-                <AccordionTrigger className="text-left font-medium px-2">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="px-2 pt-2 text-gray-600">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        )}
-        
-        <div className="mt-12 bg-primary-50 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">¿No encontraste lo que buscabas?</h2>
-          <p className="text-gray-600 mb-4">
-            Estamos aquí para ayudarte. No dudes en contactarnos si tienes alguna pregunta adicional.
+      </div>
+      
+      {/* Resultados */}
+      {filteredFaqs.length === 0 ? (
+        <div className="text-center py-12 bg-gray-50 rounded-xl">
+          <p className="text-lg text-gray-600 mb-2">
+            No se encontraron resultados para "{searchTerm}"
           </p>
-          <a 
-            href="/contact" 
-            className="inline-block bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 transition-colors"
-          >
-            Contáctanos
-          </a>
+          <p className="text-gray-500">
+            Intenta con otros términos o contáctanos directamente
+          </p>
         </div>
+      ) : (
+        <Accordion type="single" collapsible className="space-y-4">
+          {filteredFaqs.map((faq, index) => (
+            <AccordionItem 
+              key={index} 
+              value={`item-${index}`} 
+              className="border rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow"
+            >
+              <AccordionTrigger className="text-left font-medium px-6 py-4">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-4 text-gray-600">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      )}
+      
+      {/* Sección de contacto */}
+      <div className="mt-16 bg-primary-50/50 p-8 rounded-xl text-center">
+        <h2 className="text-2xl font-semibold mb-3 text-gray-900">
+          ¿No encontraste lo que buscabas?
+        </h2>
+        <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+          Estamos aquí para ayudarte. No dudes en contactarnos por WhatsApp si tienes alguna pregunta adicional.
+        </p>
+        <Button 
+          asChild
+          size="lg"
+          className="font-medium"
+        >
+          <a 
+            href="https://wa.me/584123598478" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2"
+          >
+            <FontAwesomeIcon icon={["fab", "whatsapp"]} />
+            Contáctanos por WhatsApp
+          </a>
+        </Button>
       </div>
     </div>
   );
