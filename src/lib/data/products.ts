@@ -4,12 +4,6 @@ export type ProductColor = {
   value: string;
 };
 
-export type ProductDesign = {
-  id: string;
-  name: string;
-  images: string[];
-};
-
 export type Product = {
   id: string;
   name: string;
@@ -19,10 +13,11 @@ export type Product = {
   categoryId: string;
   subcategoryId: string;
   colors: ProductColor[];
-  designs: ProductDesign[];
+  images: string[];
+  collectionIds?: string[];
   featured: boolean;
   stock: number;
-  image: string; // Nueva propiedad para la imagen principal
+  image: string;
 };
 
 export const colors: ProductColor[] = [
@@ -43,32 +38,15 @@ export const products: Product[] = [
     categoryId: "1",
     subcategoryId: "1",
     colors: [colors[0], colors[1], colors[4]],
-    designs: [
-      {
-        id: "13",
-        name: "Atemporal Clásico",
-        images: [
-          "/images/products/agenda-atemporal/agenda-atemporal-1.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-2.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-3.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-4.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-5.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-6.jpg"
-        ]
-      },
-      {
-        id: "14",
-        name: "Atemporal Premium",
-        images: [
-          "/images/products/agenda-atemporal/agenda-atemporal-7.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-8.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-9.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-10.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-11.jpg",
-          "/images/products/agenda-atemporal/agenda-atemporal-12.jpg"
-        ]
-      }
+    images: [
+      "/images/products/agenda-atemporal/agenda-atemporal-1.jpg",
+      "/images/products/agenda-atemporal/agenda-atemporal-2.jpg",
+      "/images/products/agenda-atemporal/agenda-atemporal-3.jpg",
+      "/images/products/agenda-atemporal/agenda-atemporal-4.jpg",
+      "/images/products/agenda-atemporal/agenda-atemporal-5.jpg",
+      "/images/products/agenda-atemporal/agenda-atemporal-6.jpg"
     ],
+    collectionIds: ["1", "2"], // Ahora pertenece a las colecciones "Día del Padre" y "Abogados"
     featured: true,
     stock: 20,
     image: "/images/products/agenda-atemporal/agenda-atemporal-1.jpg"
@@ -82,145 +60,50 @@ export const products: Product[] = [
     categoryId: "1",
     subcategoryId: "1",
     colors: [colors[0], colors[1], colors[4]],
-    designs: [
-      {
-        id: "1",
-        name: "Floral",
-        images: ["/images/products/agenda-floral-1.jpg", "/images/products/agenda-floral-2.jpg", "/images/products/agenda-floral-3.jpg"]
-      },
-      {
-        id: "2",
-        name: "Geométrico",
-        images: ["/images/products/agenda-geometrica-1.jpg", "/images/products/agenda-geometrica-2.jpg", "/images/products/agenda-geometrica-3.jpg"]
-      }
+    images: [
+      "/images/products/agenda-floral-1.jpg", 
+      "/images/products/agenda-floral-2.jpg", 
+      "/images/products/agenda-floral-3.jpg"
     ],
+    collectionIds: ["2"], // Pertenece solo a la colección "Abogados"
     featured: true,
     stock: 15,
-    image: "/images/products/agenda-floral-1.jpg" // Imagen principal
+    image: "/images/products/agenda-floral-1.jpg"
   },
   {
-    id: "2",
-    name: "Libreta Artística A5",
-    slug: "libreta-artistica-a5",
-    description: "Libreta de alta calidad con papel especial para dibujo y técnicas artísticas. Personalizable con diferentes diseños.",
-    price: 18.50,
-    categoryId: "2",
-    subcategoryId: "3",
-    colors: [colors[0], colors[2], colors[3]],
-    designs: [
-      {
-        id: "3",
-        name: "Abstracto",
-        images: ["/images/products/libreta-abstracta-1.jpg", "/images/products/libreta-abstracta-2.jpg", "/images/products/libreta-abstracta-3.jpg"]
-      },
-      {
-        id: "4",
-        name: "Minimalista",
-        images: ["/images/products/libreta-minimalista-1.jpg", "/images/products/libreta-minimalista-2.jpg", "/images/products/libreta-minimalista-3.jpg"]
-      }
-    ],
-    featured: false,
-    stock: 25,
-    image: "/images/products/libreta-abstracta-1.jpg" // Imagen principal
-  },
-  {
-    id: "3",
-    name: "Planner Semanal",
-    slug: "planner-semanal",
-    description: "Organizador semanal con espacio para metas, hábitos y seguimiento de tareas. Diseño práctico y elegante.",
-    price: 22.99,
-    categoryId: "1",
-    subcategoryId: "2",
-    colors: [colors[1], colors[3], colors[4]],
-    designs: [
-      {
-        id: "5",
-        name: "Botánico",
-        images: ["/images/products/planner-botanico-1.jpg", "/images/products/planner-botanico-2.jpg", "/images/products/planner-botanico-3.jpg"]
-      },
-      {
-        id: "6",
-        name: "Moderno",
-        images: ["/images/products/planner-moderno-1.jpg", "/images/products/planner-moderno-2.jpg", "/images/products/planner-moderno-3.jpg"]
-      }
-    ],
-    featured: true,
-    stock: 10,
-    image: "/images/products/planner-botanico-1.jpg" // Imagen principal
-  },
-  {
-    id: "4",
-    name: "Cuaderno de Notas Premium",
-    slug: "cuaderno-notas-premium",
-    description: "Cuaderno de tapa dura con papel de alta calidad. Ideal para tomar notas, hacer bocetos o llevar un diario.",
+    id: "15",
+    name: "Taza Personalizada",
+    slug: "taza-personalizada",
+    description: "Taza de cerámica de alta calidad con diseños personalizados. Perfecta para regalo o uso diario.",
     price: 15.99,
-    categoryId: "2",
-    subcategoryId: "4",
-    colors: [colors[0], colors[2], colors[4]],
-    designs: [
-      {
-        id: "7",
-        name: "Clásico",
-        images: ["/images/products/cuaderno-clasico-1.jpg", "/images/products/cuaderno-clasico-2.jpg", "/images/products/cuaderno-clasico-3.jpg"]
-      },
-      {
-        id: "8",
-        name: "Contemporáneo",
-        images: ["/images/products/cuaderno-contemporaneo-1.jpg", "/images/products/cuaderno-contemporaneo-2.jpg", "/images/products/cuaderno-contemporaneo-3.jpg"]
-      }
+    categoryId: "3",
+    subcategoryId: "6",
+    colors: [colors[0], colors[1], colors[3]],
+    images: [
+      "/images/products/taza-personalizada/taza-1.jpg",
+      "/images/products/taza-personalizada/taza-2.jpg"
     ],
+    collectionIds: ["1"], // Pertenece solo a la colección "Día del Padre"
     featured: false,
     stock: 30,
-    image: "/images/products/cuaderno-clasico-1.jpg" // Imagen principal
+    image: "/images/products/taza-personalizada/taza-1.jpg"
   },
   {
-    id: "5",
-    name: "Agenda Académica 2023-2024",
-    slug: "agenda-academica-2023-2024",
-    description: "Agenda diseñada para estudiantes con calendario académico, horarios de clases y planificador de exámenes.",
-    price: 24.99,
-    categoryId: "1",
-    subcategoryId: "1",
-    colors: [colors[1], colors[2], colors[4]],
-    designs: [
-      {
-        id: "9",
-        name: "Universitario",
-        images: ["/images/products/agenda-universitaria-1.jpg", "/images/products/agenda-universitaria-2.jpg", "/images/products/agenda-universitaria-3.jpg"]
-      },
-      {
-        id: "10",
-        name: "Juvenil",
-        images: ["/images/products/agenda-juvenil-1.jpg", "/images/products/agenda-juvenil-2.jpg", "/images/products/agenda-juvenil-3.jpg"]
-      }
+    id: "16",
+    name: "Llavero Personalizado",
+    slug: "llavero-personalizado",
+    description: "Llavero metálico con diseños personalizados. Ideal para regalo o uso personal.",
+    price: 9.99,
+    categoryId: "4",
+    subcategoryId: "7",
+    colors: [colors[3], colors[4]],
+    images: [
+      "/images/products/llavero-personalizado/llavero-1.jpg",
+      "/images/products/llavero-personalizado/llavero-2.jpg"
     ],
-    featured: true,
-    stock: 20,
-    image: "/images/products/agenda-universitaria-1.jpg" // Imagen principal
-  },
-  {
-    id: "6",
-    name: "Libreta de Viaje",
-    slug: "libreta-viaje",
-    description: "Libreta compacta ideal para llevar en tus viajes. Incluye secciones para itinerarios, gastos y recuerdos.",
-    price: 16.50,
-    categoryId: "2",
-    subcategoryId: "5",
-    colors: [colors[0], colors[3], colors[4]],
-    designs: [
-      {
-        id: "11",
-        name: "Aventura",
-        images: ["/images/products/libreta-aventura-1.jpg", "/images/products/libreta-aventura-2.jpg", "/images/products/libreta-aventura-3.jpg"]
-      },
-      {
-        id: "12",
-        name: "Mapamundi",
-        images: ["/images/products/libreta-mapamundi-1.jpg", "/images/products/libreta-mapamundi-2.jpg", "/images/products/libreta-mapamundi-3.jpg"]
-      }
-    ],
+    collectionIds: ["1"], // Pertenece solo a la colección "Día del Padre"
     featured: false,
-    stock: 15,
-    image: "/images/products/libreta-aventura-1.jpg" // Imagen principal
+    stock: 50,
+    image: "/images/products/llavero-personalizado/llavero-1.jpg"
   }
 ];
