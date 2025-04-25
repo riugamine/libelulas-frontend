@@ -50,11 +50,6 @@ export function Footer() {
             <h3 className="font-medium text-sm uppercase tracking-wider text-gray-500 mb-4">RECURSOS</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
                 <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Nosotros
                 </Link>
@@ -66,11 +61,6 @@ export function Footer() {
           <div>
             <h3 className="font-medium text-sm uppercase tracking-wider text-gray-500 mb-4">SOPORTE</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-                  Contacto
-                </Link>
-              </li>
               <li>
                 <Link href="/faq" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                   Preguntas Frecuentes

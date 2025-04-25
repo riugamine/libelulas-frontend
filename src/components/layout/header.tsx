@@ -72,9 +72,6 @@ export function Header() {
               <Link href="/about" className="text-lg font-medium hover:text-primary transition-colors no-underline">
                 Nosotros
               </Link>
-              <Link href="/contact" className="text-lg font-medium hover:text-primary transition-colors no-underline">
-                Contacto
-              </Link>
             </nav>
           </SheetContent>
         </Sheet>
@@ -147,14 +144,6 @@ export function Header() {
             Nosotros
           </Link>
           
-          <Link 
-            href="/contact" 
-            className={`text-sm font-medium transition-colors hover:text-primary no-underline ${
-              isActive('/contact') ? 'text-primary' : 'text-foreground'
-            }`}
-          >
-            Contacto
-          </Link>
         </nav>
 
         {/* Iconos de acción - derecha */}
