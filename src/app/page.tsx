@@ -1,12 +1,7 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/product/product-card";
 import { products } from "@/lib/data/products";
-import { categories } from "@/lib/data/categories";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { faPaintBrush, faLeaf, faAward, faShippingFast } from "@fortawesome/free-solid-svg-icons";

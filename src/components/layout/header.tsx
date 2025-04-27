@@ -177,7 +177,7 @@ export function Header() {
             </Button>
           )}
           
-          <Link href="/login">
+          <Link href="/auth">
             <Button variant="ghost" size="icon" aria-label="Mi cuenta" className="hover:bg-transparent">
               <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
             </Button>
