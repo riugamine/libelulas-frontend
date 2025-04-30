@@ -15,12 +15,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { createClient } from "@/lib/supabase/client";
+import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
 
+// Schema de validación simplificado
 const registerSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
   email: z.string().email("Correo electrónico inválido"),
-  password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
+  password: z.string()
+    .min(8, "La contraseña debe tener al menos 8 caracteres")
+    .regex(/[A-Z]/, "La contraseña debe contener al menos una mayúscula")
+    .regex(/[0-9]/, "La contraseña debe contener al menos un número"),
   confirmPassword: z.string()
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Las contraseñas no coinciden",
@@ -30,6 +37,8 @@ const registerSchema = z.object({
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -42,8 +51,47 @@ export function RegisterForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof registerSchema>) => {
-    // Aquí irá la lógica de registro
-    console.log(values);
+    try {
+      setIsLoading(true);
+      
+      const supabase = createClient();
+      
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+        options: {
+          data: {
+            nombre: values.name,
+          },
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (authError) throw authError;
+
+      // Verificar si el usuario se creó correctamente
+      if (authData.user) {
+        toast.success('¡Registro exitoso!', {
+          description: 'Por favor, verifica tu correo electrónico para activar tu cuenta.',
+        });
+        router.push("/auth/verify");
+      } else {
+        throw new Error("No se pudo crear el usuario");
+      }
+
+    } catch (error: any) {
+      let errorMessage = "Ocurrió un error durante el registro";
+      
+      if (error.message.includes("email")) {
+        errorMessage = "Este correo electrónico ya está registrado";
+      }
+
+      toast.error('Error en el registro', {
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -70,14 +118,13 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Correo electrónico</FormLabel>
               <FormControl>
-                <Input placeholder="tu@email.com" {...field} />
+                <Input placeholder="tu@email.com" type="email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         
-        {/* Campos de contraseña similares al login pero con confirmación */}
         <FormField
           control={form.control}
           name="password"
@@ -88,6 +135,7 @@ export function RegisterForm() {
                 <div className="relative">
                   <Input
                     type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
                     {...field}
                   />
                   <Button
@@ -119,6 +167,7 @@ export function RegisterForm() {
                 <div className="relative">
                   <Input
                     type={showConfirmPassword ? "text" : "password"}
+                    placeholder="••••••••"
                     {...field}
                   />
                   <Button
@@ -140,8 +189,22 @@ export function RegisterForm() {
           )}
         />
 
-        <Button type="submit" className="w-full bg-primary-600 hover:bg-primary-700">
-          Registrarse
+        <Button 
+          type="submit" 
+          className="w-full bg-secondary hover:bg-secondary/90 text-white"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <FontAwesomeIcon 
+                icon={faSpinner} 
+                className="animate-spin mr-2 h-4 w-4" 
+              />
+              <span>Registrando...</span>
+            </div>
+          ) : (
+            "Registrarse"
+          )}
         </Button>
       </form>
     </Form>

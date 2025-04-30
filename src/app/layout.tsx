@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,6 +22,7 @@ export default function RootLayout({
           <main className="flex-grow">
             {children}
           </main>
+          <Toaster />
         </div>
       </body>
     </html>
