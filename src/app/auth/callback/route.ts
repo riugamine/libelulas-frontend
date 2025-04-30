@@ -1,4 +1,4 @@
-import { createRouteHandlerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
@@ -8,7 +8,17 @@ export async function GET(request: Request) {
 
   if (code) {
     const cookieStore = cookies()
-    const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
+    
+    // Crear el cliente de Supabase con las variables de entorno
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        auth: {
+          persistSession: false,
+        }
+      }
+    )
     
     // Intercambiar el código por una sesión
     await supabase.auth.exchangeCodeForSession(code)
