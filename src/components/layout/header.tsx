@@ -234,9 +234,12 @@ export function Header() {
               size="icon" 
               onClick={() => setIsSearchOpen(true)}
               aria-label="Buscar"
-              className="hover:bg-transparent"
+              className="hover:bg-transparent group"
             >
-              <FontAwesomeIcon icon={faSearch} className="h-5 w-5" />
+              <FontAwesomeIcon 
+                icon={faSearch} 
+                className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" 
+              />
             </Button>
           )}
           
@@ -247,10 +250,13 @@ export function Header() {
                   variant="ghost" 
                   size="icon" 
                   aria-label="Mi cuenta" 
-                  className="hover:bg-transparent"
+                  className="hover:bg-transparent group"
                   disabled={isLoading}
                 >
-                  <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
+                  <FontAwesomeIcon 
+                    icon={faUser} 
+                    className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" 
+                  />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
@@ -277,18 +283,104 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <Link href="/auth">
-              <Button variant="ghost" size="icon" aria-label="Mi cuenta" className="hover:bg-transparent">
-                <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                aria-label="Mi cuenta" 
+                className="hover:bg-transparent group"
+              >
+                <FontAwesomeIcon 
+                  icon={faUser} 
+                  className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" 
+                />
               </Button>
             </Link>
           )}
           
           <Link href="/cart">
-            <Button variant="ghost" size="icon" aria-label="Carrito" className="hover:bg-transparent">
-              <FontAwesomeIcon icon={faShoppingCart} className="h-5 w-5" />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              aria-label="Carrito" 
+              className="hover:bg-transparent group relative"
+            >
+              <FontAwesomeIcon 
+                icon={faShoppingCart} 
+                className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" 
+              />
+              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                0
+              </span>
             </Button>
           </Link>
         </div>
+
+        {/* Menú móvil mejorado */}
+        <Sheet>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="ghost" size="icon" aria-label="Menú" className="hover:bg-transparent group">
+              <FontAwesomeIcon 
+                icon={faBars} 
+                className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" 
+              />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+            <div className="flex flex-col h-full">
+              <nav className="flex flex-col gap-6 mt-8 flex-grow">
+                <Link href="/" className="text-lg font-medium hover:text-primary transition-colors no-underline">
+                  Inicio
+                </Link>
+                {categories.map((category) => (
+                  <div key={category.id} className="space-y-3">
+                    <Link 
+                      href={`/category/${category.slug}`} 
+                      className="text-lg font-medium hover:text-primary transition-colors no-underline flex items-center justify-between"
+                    >
+                      {category.name}
+                      <FontAwesomeIcon icon={faChevronDown} className="h-4 w-4" />
+                    </Link>
+                    <div className="pl-4 space-y-2">
+                      {category.subcategories.map((subcategory) => (
+                        <Link 
+                          key={subcategory.id} 
+                          href={`/category/${category.slug}/${subcategory.slug}`}
+                          className="block text-sm text-muted-foreground hover:text-primary transition-colors no-underline"
+                        >
+                          {subcategory.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <Link href="/about" className="text-lg font-medium hover:text-primary transition-colors no-underline">
+                  Nosotros
+                </Link>
+              </nav>
+              
+              {/* Footer del menú móvil */}
+              <div className="mt-auto border-t pt-4">
+                <div className="flex items-center justify-between">
+                  {user ? (
+                    <div className="flex items-center gap-2">
+                      <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
+                      <span className="text-sm truncate">{user.email}</span>
+                    </div>
+                  ) : (
+                    <Link href="/auth" className="flex items-center gap-2 text-sm no-underline">
+                      <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
+                      Iniciar sesión
+                    </Link>
+                  )}
+                  <Link href="/cart" className="flex items-center gap-2 text-sm no-underline">
+                    <FontAwesomeIcon icon={faShoppingCart} className="h-5 w-5" />
+                    Carrito
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
