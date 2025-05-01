@@ -69,6 +69,7 @@ function SheetContent({
             "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t",
           className
         )}
+        aria-describedby="sheet-content-description"
         {...props}
       >
         {children}
@@ -76,9 +77,12 @@ function SheetContent({
           <XIcon className="size-4" />
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
+        <span className="sr-only" id="sheet-content-description">
+          Panel deslizable que contiene contenido complementario
+        </span>
       </SheetPrimitive.Content>
     </SheetPortal>
-  )
+  );
 }
 
 function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {

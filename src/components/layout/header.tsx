@@ -15,12 +15,15 @@ import {
   faTimes,
   faSignOutAlt,
   faUserCircle,
-  faChevronDown
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { 
   Sheet, 
   SheetContent, 
-  SheetTrigger 
+  SheetTrigger,
+  SheetTitle,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -91,45 +94,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* Menú móvil */}
-        <Sheet>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" aria-label="Menú" className="hover:bg-transparent">
-              <FontAwesomeIcon icon={faBars} className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-            <nav className="flex flex-col gap-6 mt-8">
-              <Link href="/" className="text-lg font-medium hover:text-primary transition-colors no-underline">
-                Inicio
-              </Link>
-              {categories.map((category) => (
-                <div key={category.id} className="space-y-3">
-                  <Link 
-                    href={`/category/${category.slug}`} 
-                    className="text-lg font-medium hover:text-primary transition-colors no-underline"
-                  >
-                    {category.name}
-                  </Link>
-                  <div className="pl-4 space-y-2">
-                    {category.subcategories.map((subcategory) => (
-                      <Link 
-                        key={subcategory.id} 
-                        href={`/category/${category.slug}/${subcategory.slug}`}
-                        className="block text-sm text-muted-foreground hover:text-primary transition-colors no-underline"
-                      >
-                        {subcategory.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              <Link href="/about" className="text-lg font-medium hover:text-primary transition-colors no-underline">
-                Nosotros
-              </Link>
-            </nav>
-          </SheetContent>
-        </Sheet>
+
         
         {/* Logo */}
         <div className="flex items-center">
@@ -325,41 +290,58 @@ export function Header() {
               />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+          <SheetContent side="left" className="w-[300px] sm:w-[400px] p-0">
             <div className="flex flex-col h-full">
-              <nav className="flex flex-col gap-6 mt-8 flex-grow">
-                <Link href="/" className="text-lg font-medium hover:text-primary transition-colors no-underline">
-                  Inicio
-                </Link>
-                {categories.map((category) => (
-                  <div key={category.id} className="space-y-3">
-                    <Link 
-                      href={`/category/${category.slug}`} 
-                      className="text-lg font-medium hover:text-primary transition-colors no-underline flex items-center justify-between"
-                    >
-                      {category.name}
-                      <FontAwesomeIcon icon={faChevronDown} className="h-4 w-4" />
-                    </Link>
-                    <div className="pl-4 space-y-2">
-                      {category.subcategories.map((subcategory) => (
-                        <Link 
-                          key={subcategory.id} 
-                          href={`/category/${category.slug}/${subcategory.slug}`}
-                          className="block text-sm text-muted-foreground hover:text-primary transition-colors no-underline"
-                        >
-                          {subcategory.name}
-                        </Link>
-                      ))}
+              <div className="p-6 border-b">
+                <div className="flex items-center justify-between">
+                  <SheetTitle className="text-xl font-bold">MENU</SheetTitle>
+                </div>
+                  <SheetDescription> Libelulas Design </SheetDescription>
+              </div>
+              
+              <div className="flex-1 overflow-y-auto px-6">
+                <nav className="flex flex-col gap-6 py-8">
+                  <Link 
+                    href="/" 
+                    className="text-lg font-medium hover:text-primary transition-colors no-underline"
+                  >
+                    Inicio
+                  </Link>
+                  
+                  {categories.map((category) => (
+                    <div key={category.id} className="space-y-4">
+                      <Link 
+                        href={`/category/${category.slug}`} 
+                        className="text-lg font-medium hover:text-primary transition-colors no-underline flex items-center justify-between"
+                      >
+                        {category.name}
+                        <FontAwesomeIcon icon={faChevronDown} className="h-4 w-4" />
+                      </Link>
+                      <div className="space-y-3 border-l-2 border-primary/20">
+                        {category.subcategories.map((subcategory) => (
+                          <Link 
+                            key={subcategory.id} 
+                            href={`/category/${category.slug}/${subcategory.slug}`}
+                            className="block text-sm text-muted-foreground hover:text-primary transition-colors no-underline pl-4"
+                          >
+                            {subcategory.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
-                <Link href="/about" className="text-lg font-medium hover:text-primary transition-colors no-underline">
-                  Nosotros
-                </Link>
-              </nav>
+                  ))}
+                  
+                  <Link 
+                    href="/about" 
+                    className="text-lg font-medium hover:text-primary transition-colors no-underline"
+                  >
+                    Nosotros
+                  </Link>
+                </nav>
+              </div>
               
               {/* Footer del menú móvil */}
-              <div className="mt-auto border-t pt-4">
+              <div className="border-t p-6 space-y-4">
                 <div className="flex items-center justify-between">
                   {user ? (
                     <div className="flex items-center gap-2">
@@ -367,14 +349,32 @@ export function Header() {
                       <span className="text-sm truncate">{user.email}</span>
                     </div>
                   ) : (
-                    <Link href="/auth" className="flex items-center gap-2 text-sm no-underline">
+                    <Link href="/auth" className="flex items-center gap-2 text-sm no-underline hover:text-primary transition-colors">
                       <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
                       Iniciar sesión
                     </Link>
                   )}
-                  <Link href="/cart" className="flex items-center gap-2 text-sm no-underline">
+                  <Link href="/cart" className="flex items-center gap-2 text-sm no-underline hover:text-primary transition-colors">
                     <FontAwesomeIcon icon={faShoppingCart} className="h-5 w-5" />
                     Carrito
+                  </Link>
+                </div>
+                
+                {/* Redes sociales */}
+                <div className="flex items-center justify-center gap-4 pt-4">
+                  <Link 
+                    href="https://facebook.com" 
+                    target="_blank" 
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <FontAwesomeIcon icon={faFacebook} className="h-5 w-5" />
+                  </Link>
+                  <Link 
+                    href="https://instagram.com" 
+                    target="_blank" 
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <FontAwesomeIcon icon={faInstagram} className="h-5 w-5" />
                   </Link>
                 </div>
               </div>
