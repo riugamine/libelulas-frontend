@@ -17,7 +17,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEye, faEyeSlash, faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase/client";
 import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/useAuthStore";
@@ -45,10 +45,6 @@ export function LoginForm() {
     try {
       setIsLoading(true);
       
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      );
       
       const { data, error } = await supabase.auth.signInWithPassword({
         email: values.email,

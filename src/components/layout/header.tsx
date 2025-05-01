@@ -14,7 +14,8 @@ import {
   faUser, 
   faTimes,
   faSignOutAlt,
-  faUserCircle
+  faUserCircle,
+  faChevronDown
 } from "@fortawesome/free-solid-svg-icons";
 import { 
   Sheet, 
@@ -31,7 +32,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { categories } from "@/lib/data/categories";
-import { User } from '@supabase/supabase-js';
+import { toast } from 'sonner';
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -56,21 +57,32 @@ export function Header() {
 
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        setUser(session?.user || null);
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+      }
     });
 
     return () => subscription.unsubscribe();
-  }, [supabase.auth, setUser, setLoading]);
+  }, [setUser, setLoading]); // Removida la dependencia de supabase.auth
 
   // Manejar cierre de sesión
   const handleSignOut = async () => {
     try {
       setLoading(true);
-      await logout(); // Usar el método logout del store que ya maneja Supabase
+      await logout();
+      toast.success('Sesión cerrada', {
+        description: 'Has cerrado sesión correctamente'
+      });
+      router.push('/');
       router.refresh();
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
+      toast.error('Error', {
+        description: 'No se pudo cerrar la sesión'
+      });
     } finally {
       setLoading(false);
     }
@@ -155,11 +167,19 @@ export function Header() {
                   }`}
                 >
                   {category.name}
+                  <FontAwesomeIcon 
+                    icon={faChevronDown} 
+                    className="ml-1 h-3 w-3 transition-transform duration-200" 
+                  />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="w-48">
+              <DropdownMenuContent 
+                align="center" 
+                className="w-48 bg-white shadow-md rounded-md border border-gray-200"
+                sideOffset={8}
+              >
                 <Link href={`/category/${category.slug}`} className="w-full no-underline">
-                  <DropdownMenuItem className="cursor-pointer">
+                  <DropdownMenuItem className="cursor-pointer hover:bg-gray-50">
                     Ver todo {category.name}
                   </DropdownMenuItem>
                 </Link>
@@ -169,7 +189,7 @@ export function Header() {
                     href={`/category/${category.slug}/${subcategory.slug}`}
                     className="w-full no-underline"
                   >
-                    <DropdownMenuItem className="cursor-pointer">
+                    <DropdownMenuItem className="cursor-pointer hover:bg-gray-50">
                       {subcategory.name}
                     </DropdownMenuItem>
                   </Link>
@@ -220,7 +240,7 @@ export function Header() {
             </Button>
           )}
           
-          {!isLoading && (user ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button 
@@ -261,7 +281,7 @@ export function Header() {
                 <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
               </Button>
             </Link>
-          ))}
+          )}
           
           <Link href="/cart">
             <Button variant="ghost" size="icon" aria-label="Carrito" className="hover:bg-transparent">
