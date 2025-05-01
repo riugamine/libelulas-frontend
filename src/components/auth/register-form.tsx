@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { createClient } from "@/lib/supabase/client";
+import { supabase } from '@/lib/supabase/client'
 import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 
@@ -53,8 +53,6 @@ export function RegisterForm() {
   const onSubmit = async (values: z.infer<typeof registerSchema>) => {
     try {
       setIsLoading(true);
-      
-      const supabase = createClient();
       
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: values.email,

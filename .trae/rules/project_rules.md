@@ -12,3 +12,5 @@ use fontawesome for all the icons
 use pnpm as the package manager
 mantain the code clean and readable
 mantain the mobile first design
+use zustand for all the global state management
+use sonner for all the notifications

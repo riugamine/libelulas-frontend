@@ -16,7 +16,11 @@ import {
 } from "@/components/ui/form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { createClient } from "@supabase/supabase-js";
+import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/store/useAuthStore";
 
 const loginSchema = z.object({
   email: z.string().email("Correo electrónico inválido"),
@@ -25,6 +29,9 @@ const loginSchema = z.object({
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { setUser } = useAuthStore();
   
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -35,8 +42,42 @@ export function LoginForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-    // Aquí irá la lógica de autenticación
-    console.log(values);
+    try {
+      setIsLoading(true);
+      
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      );
+      
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password,
+      });
+
+      if (error) throw error;
+
+      if (data.user) {
+        setUser(data.user);
+        toast.success('¡Bienvenido!', {
+          description: 'Has iniciado sesión correctamente.',
+        });
+        router.push("/");
+      }
+
+    } catch (error: any) {
+      let errorMessage = "Ocurrió un error durante el inicio de sesión";
+      
+      if (error.message.includes("Invalid login credentials")) {
+        errorMessage = "Credenciales inválidas";
+      }
+
+      toast.error('Error de inicio de sesión', {
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -49,7 +90,7 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Correo electrónico</FormLabel>
               <FormControl>
-                <Input placeholder="tu@email.com" {...field} />
+                <Input placeholder="tu@email.com" type="email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -66,6 +107,7 @@ export function LoginForm() {
                 <div className="relative">
                   <Input
                     type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
                     {...field}
                   />
                   <Button
@@ -87,8 +129,22 @@ export function LoginForm() {
           )}
         />
 
-        <Button type="submit" className="w-full bg-primary-600 hover:bg-primary-700">
-          Iniciar Sesión
+        <Button 
+          type="submit" 
+          className="w-full bg-secondary hover:bg-secondary/90 text-white"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <FontAwesomeIcon 
+                icon={faSpinner} 
+                className="animate-spin mr-2 h-4 w-4" 
+              />
+              <span>Iniciando sesión...</span>
+            </div>
+          ) : (
+            "Iniciar Sesión"
+          )}
         </Button>
 
         <div className="relative my-6">

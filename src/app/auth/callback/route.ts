@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from '@/lib/supabase/client'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
@@ -8,15 +8,6 @@ export async function GET(request: Request) {
   const type = requestUrl.searchParams.get('type')
 
   if (code) {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        auth: {
-          persistSession: false,
-        }
-      }
-    )
 
     try {
       // Intentar verificar el código

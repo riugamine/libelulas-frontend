@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from '@/lib/supabase/client'
 import { useAuthStore } from '@/lib/store/useAuthStore'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
@@ -38,10 +38,6 @@ export function Header() {
   const { user, setUser, isLoading, setLoading, logout } = useAuthStore();
   const pathname = usePathname();
   const router = useRouter();
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
   
   const isActive = (path: string) => pathname === path;
 
@@ -71,8 +67,7 @@ export function Header() {
   const handleSignOut = async () => {
     try {
       setLoading(true);
-      await supabase.auth.signOut();
-      logout(); // Usar el método logout del store
+      await logout(); // Usar el método logout del store que ya maneja Supabase
       router.refresh();
     } catch (error) {
       console.error('Error al cerrar sesión:', error);

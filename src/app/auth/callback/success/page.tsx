@@ -40,8 +40,8 @@ export default function VerificationSuccessPage() {
               variant="outline"
               className="w-full"
             >
-              <Link href="/dashboard">
-                Ir al Dashboard
+              <Link href="/">
+                Ir al inicio
               </Link>
             </Button>
           </div>
