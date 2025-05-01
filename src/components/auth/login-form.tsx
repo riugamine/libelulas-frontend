@@ -76,6 +76,27 @@ export function LoginForm() {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      setIsLoading(true);
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback/success`
+        }
+      });
+
+      if (error) throw error;
+
+    } catch (error: any) {
+      toast.error('Error al iniciar sesión con Google', {
+        description: 'Por favor, intenta de nuevo más tarde.'
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -156,10 +177,23 @@ export function LoginForm() {
           type="button" 
           variant="outline" 
           className="w-full"
-          onClick={() => {/* Implementar login con Google */}}
+          onClick={handleGoogleSignIn}
+          disabled={isLoading}
         >
-          <FontAwesomeIcon icon={faGoogle} className="mr-2 h-4 w-4" />
-          Google
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <FontAwesomeIcon 
+                icon={faSpinner} 
+                className="animate-spin mr-2 h-4 w-4" 
+              />
+              <span>Conectando con Google...</span>
+            </div>
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faGoogle} className="mr-2 h-4 w-4" />
+              Google
+            </>
+          )}
         </Button>
       </form>
     </Form>
