@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { createClient } from '@supabase/supabase-js'
+import { useAuthStore } from '@/lib/store/useAuthStore'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
   faBars, 
   faSearch, 
   faShoppingCart, 
   faUser, 
-  faTimes 
+  faTimes,
+  faSignOutAlt,
+  faUserCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { 
   Sheet, 
@@ -24,14 +28,58 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { categories } from "@/lib/data/categories";
+import { User } from '@supabase/supabase-js';
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { user, setUser, isLoading, setLoading, logout } = useAuthStore();
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
   
   const isActive = (path: string) => pathname === path;
+
+  // Verificar sesión al cargar el componente
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setUser(session?.user || null);
+      } catch (error) {
+        console.error('Error al obtener la sesión:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth, setUser, setLoading]);
+
+  // Manejar cierre de sesión
+  const handleSignOut = async () => {
+    try {
+      setLoading(true);
+      await supabase.auth.signOut();
+      logout(); // Usar el método logout del store
+      router.refresh();
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -177,11 +225,48 @@ export function Header() {
             </Button>
           )}
           
-          <Link href="/auth">
-            <Button variant="ghost" size="icon" aria-label="Mi cuenta" className="hover:bg-transparent">
-              <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
-            </Button>
-          </Link>
+          {!isLoading && (user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  aria-label="Mi cuenta" 
+                  className="hover:bg-transparent"
+                  disabled={isLoading}
+                >
+                  <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <div className="px-2 py-1.5 text-sm text-muted-foreground">
+                  {user.email}
+                </div>
+                <DropdownMenuSeparator />
+                <Link href="/profile" className="no-underline">
+                  <DropdownMenuItem className="cursor-pointer">
+                    <FontAwesomeIcon icon={faUserCircle} className="mr-2 h-4 w-4" />
+                    Mi Perfil
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem 
+                  className="cursor-pointer text-destructive focus:text-destructive"
+                  onClick={handleSignOut}
+                  disabled={isLoading}
+                >
+                  <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 h-4 w-4" />
+                  Cerrar Sesión
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link href="/auth">
+              <Button variant="ghost" size="icon" aria-label="Mi cuenta" className="hover:bg-transparent">
+                <FontAwesomeIcon icon={faUser} className="h-5 w-5" />
+              </Button>
+            </Link>
+          ))}
           
           <Link href="/cart">
             <Button variant="ghost" size="icon" aria-label="Carrito" className="hover:bg-transparent">
